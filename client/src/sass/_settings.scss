@@ -1,0 +1,38 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+body {
+  font-size: 62.5%;
+  font-weight: 400;
+  font-family: $font-body;
+  width: 100%;
+  overflow: auto;
+}
+
+// flex footer 
+.Site {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.Site-content {
+    flex: 1;
+    min-height: 100%;
+}
