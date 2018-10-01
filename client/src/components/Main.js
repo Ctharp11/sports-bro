@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TopNews from './Main/TopNews';
 
 class Main extends Component {
     constructor() {
@@ -7,11 +8,14 @@ class Main extends Component {
 
         }
     }
+    componentDidMount() {
+        
+    }
     render(){
         return (
             <main className="main"> 
               <div className="container">
-                main shit
+                <TopNews />
               </div>
             </main>
         )

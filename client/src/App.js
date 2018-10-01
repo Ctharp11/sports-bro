@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import Account from './components/Account';
 import Main from './components/Main';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   constructor () {

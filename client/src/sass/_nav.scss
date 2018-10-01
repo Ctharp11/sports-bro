@@ -7,14 +7,34 @@
     justify-content: space-between;
     background-color: $white;
     max-width:1500px;
+    padding: 2rem 0;
+    @media all and (max-width: 550px) {
+        display: block;
+    }
     &-left {
         margin-left:5rem;
+        @media all and (max-width: 767px) {
+            margin-left: 1rem;
+        }
+        &-flex {
+            align-items:center;
+            display: flex;
+            @media all and (max-width: 550px) {
+                justify-content: center;
+            }
+        }
     }
     &-right {
         margin-right:5rem;
+        @media all and (max-width: 767px) {
+            margin-right: 1rem;
+        }
         &-flex {
             display: flex;
             justify-content: space-between;
+            @media all and (max-width: 550px) {
+                justify-content: center;
+            }
         }
     }
     &-header {
@@ -23,10 +43,51 @@
         font-weight: 600;
         &-sub {
             font-size: 1.6rem;
+            @media all and (max-width: 550px) {
+                text-align: center;
+            }
+        }
+        &-img {
+        height: 8rem;
+        margin-left:2rem;
+        @media all and (max-width: 550px) {
+            height: 6rem;
+        }
+        
+        }
+        @media all and (max-width: 550px) {
+            font-size: 2.5rem;
         }
     }
     &-sub {
         font-size: 1.6rem;
         margin: 0 2rem;
+        @media all and (max-width: 550px) {
+            margin-top: 1rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid rgb(48, 99, 48)
+        }
+    }
+}
+
+.subnav {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: 15rem;
+    margin: 0 5rem;
+    &-text {
+        text-transform: uppercase;
+        font-size:16px;
+        font-weight:300;
+        margin: 0 1rem;
+        text-align: center;
+    }
+
+    @media all and (max-width: 950px) {
+        overflow-x: auto;
+    }
+    @media all and (max-width: 767px) {
+        margin: 0 1rem;
     }
 }
