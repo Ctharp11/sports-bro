@@ -35,9 +35,8 @@ class Nav extends Component {
                     
                 </div> 
             </nav>
-            {this.props.browser.location.pathname === '/' &&
                 <div className="subnav"> 
-                    <div className="subnav-text"> ESPN </div>
+                    <Link to="/espn"> <div className="subnav-text"> ESPN </div> </Link>
                     <div className="subnav-text"> Bleacher Report </div>
                     <div className="subnav-text"> Fox Sports</div>
                     <div className="subnav-text"> NFL News</div>
@@ -45,7 +44,6 @@ class Nav extends Component {
                     <div className="subnav-text"> Talk Sport </div>
                     <div className="subnav-text"> The Sport Bible </div>
                 </div>
-            }
             </div>
         )
     }

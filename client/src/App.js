@@ -4,6 +4,7 @@ import Nav from './components/Nav';
 import Footer from './components/Footer';
 import Account from './components/Account';
 import Main from './components/Main';
+import ESPN from './components/ESPN';
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -44,6 +45,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Main} /> 
             <Route exact path="/account" render={ () => this.checkAuth(Account, allProps) } />
+            <Route exact path="/espn" component={ESPN} />
 
           </Switch>
         </div>
