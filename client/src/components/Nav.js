@@ -37,12 +37,13 @@ class Nav extends Component {
             </nav>
                 <div className="subnav"> 
                     <Link to="/espn"> <div className="subnav-text"> ESPN </div> </Link>
-                    <div className="subnav-text"> Bleacher Report </div>
-                    <div className="subnav-text"> Fox Sports</div>
-                    <div className="subnav-text"> NFL News</div>
-                    <div className="subnav-text"> NHL News </div>
-                    <div className="subnav-text"> Talk Sport </div>
-                    <div className="subnav-text"> The Sport Bible </div>
+                    <Link to="/bleacher-report"><div className="subnav-text"> Bleacher Report </div></Link>
+                    <Link to="/fox-sports"><div className="subnav-text"> Fox Sports</div></Link>
+                    <Link to="/nfl-news"><div className="subnav-text"> NFL News</div></Link>
+                    <Link to="/nhl-news"><div className="subnav-text"> NHL News </div></Link>
+                    <Link to="/talk-sport"><div className="subnav-text"> Talk Sport </div></Link>
+                    <Link to="/sports-bible"><div className="subnav-text"> The Sport Bible </div></Link>
+                    <Link to="/bbc-sports"><div className="subnav-text"> BBC Sports </div></Link>
                 </div>
             </div>
         )

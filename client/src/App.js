@@ -5,6 +5,14 @@ import Footer from './components/Footer';
 import Account from './components/Account';
 import Main from './components/Main';
 import ESPN from './components/ESPN';
+import BR from './components/BR';
+import FOX from './components/FOX';
+import NFL from './components/NFL';
+import NHL from './components/NHL';
+import TALK from './components/TALK';
+import BIBLE from './components/Bible';
+import BBC from './components/BBC';
+
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -46,6 +54,13 @@ class App extends Component {
             <Route exact path="/" component={Main} /> 
             <Route exact path="/account" render={ () => this.checkAuth(Account, allProps) } />
             <Route exact path="/espn" component={ESPN} />
+            <Route exact path="/bleacher-report" component={BR} />
+            <Route exact path="/fox-sports" component={FOX} />
+            <Route exact path="/nfl-news" component={NFL} />
+            <Route exact path="/nhl-news" component={NHL} />
+            <Route exact path="/talk-sport" component={TALK} />
+            <Route exact path="/sports-bible" component={BIBLE} />
+            <Route exact path="/bbc-sports" component={BBC} />
 
           </Switch>
         </div>
