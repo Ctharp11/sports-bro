@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import {Route, Switch, withRouter } from 'react-router-dom';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
+import Account from './components/Account';
+import Main from './components/Main';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   constructor () {
@@ -19,6 +23,13 @@ class App extends Component {
     this.setState({ loggedin: false });
   }
 
+  checkAuth = (Component, props) => {
+    if (!this.state.loggedin) {
+      return <Redirect to="/" />
+    }
+    return <Component {...props} />
+  }
+
   render() {
     const allProps = {
       browser: this.props,
@@ -26,14 +37,13 @@ class App extends Component {
       signin: this.signin,
       signout: this.signout
     }
-    console.log(allProps);
-
     return (
-
       <div className="Site">
-        <div className="home Site-content">
+        <div className="Site-content">
           <Nav {...allProps} />
           <Switch>
+            <Route exact path="/" component={Main} /> 
+            <Route exact path="/account" render={ () => this.checkAuth(Account, allProps) } />
 
           </Switch>
         </div>

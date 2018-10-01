@@ -10,7 +10,10 @@ class Account extends Component {
     render(){
       return (
         <div className="account"> 
-          My account
+          <div className="container">
+            My account
+          </div>
+         
         </div>
       )
     }

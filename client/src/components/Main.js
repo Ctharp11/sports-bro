@@ -10,9 +10,9 @@ class Main extends Component {
     render(){
         return (
             <main className="main"> 
-            main shit
-               
-
+              <div className="container">
+                main shit
+              </div>
             </main>
         )
     }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Nav extends Component {
     constructor() {
@@ -11,13 +12,14 @@ class Nav extends Component {
         return (
             <nav className="nav"> 
                 <div className="nav-left">
-                    <div className="nav-header"> Sports Bro </div> 
+                    <Link to="/"> <div className="nav-header"> Sports Bro </div> </Link> 
+                    <div className="nav-header-sub"> All your sports news in one spot. </div>
                 </div>
                 <div className="nav-right">
                     {this.props.loggedin 
                         ?
                         <div className="nav-right-flex">
-                          <div className="nav-sub"> Account </div>
+                          <Link to="/account"> <div className="nav-sub hover"> Account </div> </Link>
                           <div className="nav-sub hover" onClick={this.props.signout}> Sign Out </div>
                         </div>
                         :

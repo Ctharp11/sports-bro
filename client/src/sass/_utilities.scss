@@ -1,3 +1,13 @@
-.hover {
+.hover:hover {
     cursor: pointer;
 }
+a,
+a:hover {
+    color: $black;
+    text-decoration: none;
+}
+
+.hover:hover {
+    color: #999;
+}
+
