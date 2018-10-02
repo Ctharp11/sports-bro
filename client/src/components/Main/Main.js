@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TopNews from './Main/TopNews';
+import TopNews from './TopNews';
 
 class Main extends Component {
     constructor() {

@@ -15,7 +15,7 @@ class Nav extends Component {
                 <div className="nav-left">
                     <div className="nav-left-flex">
                       <Link to="/"> <div className="nav-header"> Sports Bro </div> </Link> 
-                      <div><img className="nav-header-img" src='/img/bro-wink.png' alt="sports-bro" /></div>
+                      <Link to="/"><div><img className="nav-header-img" src='/img/bro-wink.png' alt="sports-bro" /></div></Link>
                     </div>
                     <div className="nav-header-sub"> Helping you shotgun all the sports news. </div>
                     
@@ -35,16 +35,6 @@ class Nav extends Component {
                     
                 </div> 
             </nav>
-                <div className="subnav"> 
-                    <Link to="/espn"> <div className="subnav-text"> ESPN </div> </Link>
-                    <Link to="/bleacher-report"><div className="subnav-text"> Bleacher Report </div></Link>
-                    <Link to="/fox-sports"><div className="subnav-text"> Fox Sports</div></Link>
-                    <Link to="/nfl-news"><div className="subnav-text"> NFL News</div></Link>
-                    <Link to="/nhl-news"><div className="subnav-text"> NHL News </div></Link>
-                    <Link to="/talk-sport"><div className="subnav-text"> Talk Sport </div></Link>
-                    <Link to="/sports-bible"><div className="subnav-text"> The Sport Bible </div></Link>
-                    <Link to="/bbc-sports"><div className="subnav-text"> BBC Sports </div></Link>
-                </div>
             </div>
         )
     }

@@ -33,13 +33,23 @@ body {
 }
 
 .Site-content {
+    align-items: flex-start;
     flex: 1;
     min-height: 100%;
 }
 
 .container {
-  margin-top: 20rem;
+  margin-top: 5rem;
   margin-left: 5rem;
   margin-right: 5rem;
   padding: 0;
+}
+
+.sticky {
+  position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: $white;
+    padding: 2rem 0;
+    box-shadow: $box-shadow;
 }

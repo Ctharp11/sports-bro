@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { newsApiSportBible } from '../services/api.js'
+import { newsApiFox } from '../../services/api.js'
 
-class Bible extends Component {
+class Fox extends Component {
     constructor() {
         super();
         this.state = {
@@ -9,7 +9,7 @@ class Bible extends Component {
         }
     }
     componentDidMount () {
-        newsApiSportBible
+        newsApiFox
         .then(res => {
             if (res.status === 'ok') {
                 this.setState({ posts: res.articles})
@@ -20,7 +20,7 @@ class Bible extends Component {
     render() {
         return (
             <div className="container"> 
-                The Sport Bible
+                Fox Sports
                 <div className="toppost">
                         {this.state.posts.map((post,index) => (
                             <div className="toppost-content" key={index}> 
@@ -42,4 +42,4 @@ class Bible extends Component {
     }
 }
 
-export default Bible;
+export default Fox;
