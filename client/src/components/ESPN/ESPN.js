@@ -13,7 +13,6 @@ class ESPN extends Component {
         window.scroll(0, 0)
         newsApiESPN
         .then(res => {
-            console.log(res.articles);
             if (res.status === 'ok') {
                 this.setState({ posts: res.articles})
             }

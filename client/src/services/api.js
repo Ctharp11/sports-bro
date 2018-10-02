@@ -49,6 +49,12 @@ export const newsApiBBC = newsapi.v2.everything({
         language: 'en'
       });
 
+export const favorites = (team) => {
+  return newsapi.v2.everything({
+        q: `${team}`,
+        language: 'en'
+      });
+}
 
 
 

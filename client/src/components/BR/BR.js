@@ -17,8 +17,10 @@ class BR extends Component {
                 this.setState({ posts: res.articles})
             }
           });
-
+        //calling a favorited team to add after user authentication
+        // favorites('Dallas Cowboys').then(res => console.log(res));
     }
+
     render() {
         return (
             <div className="container"> 
