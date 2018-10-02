@@ -10,13 +10,14 @@ class ESPN extends Component {
         }
     }
     componentDidMount () {
+        window.scroll(0, 0)
         newsApiESPN
         .then(res => {
+            console.log(res.articles);
             if (res.status === 'ok') {
                 this.setState({ posts: res.articles})
             }
           });
-
     }
     render() {
         return (
@@ -28,9 +29,12 @@ class ESPN extends Component {
               </div>
             <div className="art-con">
               {this.state.posts.map((post,index) => (
-                  <div key={index}> <ArticleContainer {...post}/> </div>
+                  <div key={index}><a href={post.url} target="_blank"> <ArticleContainer {...post}/></a></div>
               ))
               }
+            </div>
+            <div> 
+            
             </div>
            </div>
         )

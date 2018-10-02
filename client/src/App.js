@@ -5,7 +5,6 @@ import Footer from './components/Footer';
 import Account from './components/Account';
 import Main from './components/Main/Main';
 import ESPN from './components/ESPN/ESPN';
-import ESPNArticle from './components/ESPN/ESPNArticle';
 import BR from './components/BR/BR';
 import FOX from './components/Fox/FOX';
 import NFL from './components/NFL/NFL';
@@ -64,7 +63,6 @@ class App extends Component {
             <Route exact path="/" component={Main} /> 
             <Route exact path="/account" render={ () => this.checkAuth(Account, allProps) } />
             <Route exact path="/espn" component={ESPN} />
-            <Route exact path="/espn/:id" component={ESPNArticle} />
             <Route exact path="/bleacher-report" component={BR} />
             <Route exact path="/fox-sports" component={FOX} />
             <Route exact path="/nfl-news" component={NFL} />

@@ -10,6 +10,7 @@ class BBC extends Component {
         }
     }
     componentDidMount () {
+        window.scroll(0, 0)
         newsApiBBC
         .then(res => {
             if (res.status === 'ok') {
@@ -28,7 +29,7 @@ class BBC extends Component {
                 </div>
                 <div className="art-con">
                     {this.state.posts.map((post,index) => (
-                        <div key={index}> <ArticleContainer {...post}/> </div>
+                        <div key={index}><a href={post.url} target="_blank"> <ArticleContainer {...post}/></a> </div>
                     ))
                     }
                 </div>
