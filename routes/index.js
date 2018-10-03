@@ -10,6 +10,7 @@ router.post('/', articleController.postArticle);
 router.post('/register', 
     userController.validateRegister,
     userController.validatePassword,
+    userController.register,
     authController.login
 )
 

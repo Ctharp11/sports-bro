@@ -15,7 +15,7 @@ import BBC from './components/BBC/BBC';
 import Signup from './components/Signup';
 import NotFound from './components/NotFound';
 
-import { registerUser } from './services/utils';
+// import { registerUser } from './services/utils';
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -57,7 +57,9 @@ class App extends Component {
   }
 
   registerUserFun = (user) => {
-    registerUser(user)
+    // registerUser(user)
+    // .then(res => console.log(res))
+    // .catch(err => console.log(err))
   }
 
   handleLogin = (e) => {

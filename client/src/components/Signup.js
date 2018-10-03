@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { registerUser } from '../services/utils';
 
 class Signup extends Component {
     constructor() {
@@ -33,7 +34,9 @@ class Signup extends Component {
             email: this.state.email,
             password: this.state.password
         };
-        this.props.registerUserFun(user)
+        registerUser(user)
+        .then(res => this.setState({ error: res.data.errors }))
+        .catch(err => console.log(err))
     }
 
     render() {
@@ -44,7 +47,7 @@ class Signup extends Component {
               {this.state.error !== '' && <div className="error-text">{this.state.error}</div>}
               <input className="signup-input" type="email" name="email" placeholder="Email" value={this.state.email} onChange={ this.handleAuthChange } />
               <input className="signup-input" type="text" name="name" value={this.state.name} placeholder="Name" onChange={ this.handleAuthChange } />
-              <div className="signup-password">Passwords must be 8 characters long with at least one uppercase and one number.</div>
+              <div className="signup-password">Your password must be at least 8 characters long, have at least one uppercase letter, at least one number, and no spaces.</div>
               <input className="signup-input" type="password" name="password" value={this.state.password} placeholder="Password" onChange={ this.handleAuthChange } />
               <input className="signup-input" type="password" name="passwordConfirm" placeholder="Confirm password" onChange={ this.handleAuthChange } />
               <input className="signup-input-button" type="submit" />

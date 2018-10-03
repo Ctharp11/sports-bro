@@ -6,6 +6,7 @@ const promisify = require('es6-promisify');
 const main = require('../handlers/mail');
 const passwordValidator = require('password-validator');
 
-exports.login = (req, res) => {
-    console.log('logging in', req.body)
-}
+exports.login = passport.authenticate('local', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/account');
+  };
