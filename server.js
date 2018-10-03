@@ -21,7 +21,7 @@ mongoose.connect(process.env.DATABASE, {useNewUrlParser: true})
 .catch(err => console.log(`Mongo error ${err}`))
 mongoose.set('useCreateIndex', true)
 
-app.use('/api', routes)
+app.use('/', routes)
 
 app.use((error, req, res, next) => {
     console.error(error);

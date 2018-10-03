@@ -15,6 +15,8 @@ import BBC from './components/BBC/BBC';
 import Signup from './components/Signup';
 import NotFound from './components/NotFound';
 
+import { registerUser } from './services/utils';
+
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
@@ -28,15 +30,6 @@ class App extends Component {
       windowWidth: 0
     }
   }
-
-  // <div className="subnav-text"><Link to="/espn"> ESPN</Link> </div> 
-  // <div className="subnav-text"><Link to="/bleacher-report"> Bleacher Report </Link></div>
-  // <div className="subnav-text"><Link to="/fox-sports"> Fox Sports </Link></div>
-  // <div className="subnav-text"><Link to="/nfl-news"> NFL News</Link></div>
-  // <div className="subnav-text"><Link to="/nhl-news"> NHL News </Link></div>
-  // <div className="subnav-text"><Link to="/talk-sport"> Talk Sport </Link></div>
-  // <div className="subnav-text"><Link to="/sports-bible"> The Sport Bible </Link></div>
-  // <div className="subnav-text"><Link to="/bbc-sports"> BBC Sports </Link></div>
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
@@ -53,16 +46,6 @@ class App extends Component {
     // })
   }
 
-  // newsLength = () => {
-  //   const news = [{ name: 'ESPN', url:'espn'}, { name: 'Bleacher Report', url:'bleacher-report'}, { name: 'Fox Sports', url:'fox-sports'}, { name: 'NFL News', url:'nfl-news'}, { name: 'NHL News', url:'nhl-news'}, { name: 'Talk Sport', url:'talk-sport'}, { name: 'The Sport Bible', url:'sports-bible'}, { name: 'BBC Sports', url:'bbc-sports'}];
-  //   if (this.state.windowWidth <= 1100) {
-  //     console.log(news.length / 3)
-  //   }
-    
-  // }
-
-  //USE CSS TO CHECK FOR WIDTHS AND AT 1100PX SHOW LEFT AND RIGHT ARROWS AND SET A HORIZONTAL SCROLL THAT ALSO TRIGGERS WITH AN ONCLICK
-
   setWrapperRef = (node) => {
     this.wrapperRef = node;
   }
@@ -71,6 +54,10 @@ class App extends Component {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
        this.toggleAuthModal();
     }
+  }
+
+  registerUserFun = (user) => {
+    registerUser(user)
   }
 
   handleLogin = (e) => {
@@ -114,7 +101,8 @@ class App extends Component {
       loggedin: this.state.loggedin,
       signin: this.handleLogin,
       signout: this.handleSignout,
-      toggleAuthModal: this.toggleAuthModal
+      toggleAuthModal: this.toggleAuthModal,
+      registerUserFun: this.registerUserFun
     }
     return (
       <div className="Site">
@@ -127,7 +115,7 @@ class App extends Component {
             
             {
               this.state.news.map((news, index) => (
-                <div className="subnav-text" key={index}>
+                <div className={this.props.location.pathname === `/${news.url}` ? "subnav-text-underline subnav-text" : "subnav-text"} key={index}>
                   <Link to={`/${news.url}`}> {news.name}</Link> 
                </div>
               ))
@@ -147,7 +135,7 @@ class App extends Component {
             <Route exact path="/talk-sport" component={TALK} />
             <Route exact path="/sports-bible" component={BIBLE} />
             <Route exact path="/bbc-sports" component={BBC} />
-            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/signup" render={() => <Signup {...allProps} />} />
             <Route component={NotFound} />
 
           </Switch>
