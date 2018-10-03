@@ -23,17 +23,45 @@ class App extends Component {
     this.state = {
       loggedin: false,
       authToggle: false,
-      error: ''
+      error: '',
+      news: [{ name: 'ESPN', url:'espn'}, { name: 'Bleacher Report', url:'bleacher-report'}, { name: 'Fox Sports', url:'fox-sports'}, { name: 'NFL News', url:'nfl-news'}, { name: 'NHL News', url:'nhl-news'}, { name: 'Talk Sport', url:'talk-sport'}, { name: 'The Sport Bible', url:'sports-bible'}, { name: 'BBC Sports', url:'bbc-sports'}],
+      windowWidth: 0
     }
   }
 
+  // <div className="subnav-text"><Link to="/espn"> ESPN</Link> </div> 
+  // <div className="subnav-text"><Link to="/bleacher-report"> Bleacher Report </Link></div>
+  // <div className="subnav-text"><Link to="/fox-sports"> Fox Sports </Link></div>
+  // <div className="subnav-text"><Link to="/nfl-news"> NFL News</Link></div>
+  // <div className="subnav-text"><Link to="/nhl-news"> NHL News </Link></div>
+  // <div className="subnav-text"><Link to="/talk-sport"> Talk Sport </Link></div>
+  // <div className="subnav-text"><Link to="/sports-bible"> The Sport Bible </Link></div>
+  // <div className="subnav-text"><Link to="/bbc-sports"> BBC Sports </Link></div>
+
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
+    // this.setState({ windowWidth: window.innerWidth}, this.newsLength())
+    // window.addEventListener('resize', () => {
+    //   this.setState({ windowWidth: window.innerWidth}, this.newsLength)
+    // })
   }
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutside);
+    // window.removeEventListener('resize', () => {
+    //   this.setState({ windowWidth: window.innerWidth})
+    // })
   }
+
+  // newsLength = () => {
+  //   const news = [{ name: 'ESPN', url:'espn'}, { name: 'Bleacher Report', url:'bleacher-report'}, { name: 'Fox Sports', url:'fox-sports'}, { name: 'NFL News', url:'nfl-news'}, { name: 'NHL News', url:'nhl-news'}, { name: 'Talk Sport', url:'talk-sport'}, { name: 'The Sport Bible', url:'sports-bible'}, { name: 'BBC Sports', url:'bbc-sports'}];
+  //   if (this.state.windowWidth <= 1100) {
+  //     console.log(news.length / 3)
+  //   }
+    
+  // }
+
+  //USE CSS TO CHECK FOR WIDTHS AND AT 1100PX SHOW LEFT AND RIGHT ARROWS AND SET A HORIZONTAL SCROLL THAT ALSO TRIGGERS WITH AN ONCLICK
 
   setWrapperRef = (node) => {
     this.wrapperRef = node;
@@ -70,6 +98,16 @@ class App extends Component {
     this.setState({ authToggle: !this.state.authToggle })
   }
 
+  scrollLeft = () => {
+    var elmnt = document.getElementById("scroll-top");
+    elmnt.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  scrollRight = () => {
+    var elmnt = document.getElementById("scroll-bottom");
+    elmnt.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
   render() {
     const allProps = {
       browser: this.props,
@@ -82,15 +120,21 @@ class App extends Component {
       <div className="Site">
         <div className="Site-content">
           <Nav {...allProps} />
-          <div className="subnav sticky"> 
-              <div className="subnav-text"><Link to="/espn"> ESPN</Link> </div> 
-              <div className="subnav-text"><Link to="/bleacher-report"> Bleacher Report </Link></div>
-              <div className="subnav-text"><Link to="/fox-sports"> Fox Sports </Link></div>
-              <div className="subnav-text"><Link to="/nfl-news"> NFL News</Link></div>
-              <div className="subnav-text"><Link to="/nhl-news"> NHL News </Link></div>
-              <div className="subnav-text"><Link to="/talk-sport"> Talk Sport </Link></div>
-              <div className="subnav-text"><Link to="/sports-bible"> The Sport Bible </Link></div>
-              <div className="subnav-text"><Link to="/bbc-sports"> BBC Sports </Link></div>
+          <div className="sticky">
+            <div className="subnav-arrow subnav-arrow-left" onClick={this.scrollLeft}> ← </div>
+            <div className="subnav"> 
+            <div id="scroll-top"> </div>
+            
+            {
+              this.state.news.map((news, index) => (
+                <div className="subnav-text" key={index}>
+                  <Link to={`/${news.url}`}> {news.name}</Link> 
+               </div>
+              ))
+            }
+            <div id="scroll-bottom"> </div>
+            </div> 
+            <div className="subnav-arrow subnav-arrow-right" onClick={this.scrollRight}> → </div>
           </div>
           <Switch>
             <Route exact path="/" component={Main} /> 
