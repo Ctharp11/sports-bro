@@ -29,7 +29,7 @@ class Nav extends Component {
                         </div>
                         :
                         <div className="nav-right-flex">
-                          <div className="nav-sub hover" onClick={this.props.signin}> Sign in </div>
+                          <div className="nav-sub hover" onClick={this.props.toggleAuthModal}> Sign in </div>
                         </div>
                     }
                     

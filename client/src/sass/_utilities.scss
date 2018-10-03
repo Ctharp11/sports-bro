@@ -6,10 +6,15 @@ a:hover {
     color: $black;
     text-decoration: none;
 }
+.error-text {
+    font-size: 1.4rem;
+    color: $red;
+    text-align: center;
+    margin: 3px 0;
+}
 .hover:hover {
     color: #999;
 }
-
 .sub-header {
     font-size: 20px;
     font-family: $font-header;
