@@ -14,6 +14,9 @@ router.post('/register',
     authController.login
 )
 router.route('/account')
-    .get(userController.getAccount)
+    .get(userController.getAccount);
+router.route('/user')
+    .get(userController.getUser);
+router.post('/login', authController.login);
 
 module.exports = router;

@@ -8,10 +8,14 @@ class Account extends Component {
         }
     }
     render(){
+      console.log(this.props.userInfo)
+      if(!this.props.userInfo) {
+        return null 
+      }
       return (
         <div className="account"> 
           <div className="container">
-            My account
+            Welcome {this.props.userInfo.name}!
           </div>
          
         </div>

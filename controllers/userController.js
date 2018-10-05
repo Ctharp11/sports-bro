@@ -51,12 +51,21 @@ exports.register = async (req, res, next) => {
         next()
     }
     catch(err) {
-        console.log('error register', err)
         res.send({'error': err})
         return;
     }
 }
 
 exports.getAccount = (req, res) => {
-    res.status(200).json({ 'success': req.user });
+    res.status(200).send(req.user);
+}
+
+exports.getUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        res.json({'user': user})
+    }
+    catch(err) {
+        res.status(500).send(err)
+    }
 }

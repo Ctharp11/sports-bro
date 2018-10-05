@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch, withRouter, Link } from 'react-router-dom';
+import { getUser, signInUser } from './services/utils';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import Account from './components/Account';
@@ -27,11 +28,20 @@ class App extends Component {
       authToggle: false,
       error: '',
       news: [{ name: 'ESPN', url:'espn'}, { name: 'Bleacher Report', url:'bleacher-report'}, { name: 'Fox Sports', url:'fox-sports'}, { name: 'NFL News', url:'nfl-news'}, { name: 'NHL News', url:'nhl-news'}, { name: 'Talk Sport', url:'talk-sport'}, { name: 'The Sport Bible', url:'sports-bible'}, { name: 'BBC Sports', url:'bbc-sports'}],
-      windowWidth: 0
+      windowWidth: 0,
+      userInfo: ''
     }
   }
 
   componentDidMount() {
+    if (localStorage.getItem('loggedin')){
+      getUser()
+      .then(res => { 
+        this.setState({ loggedin: true });
+        this.setState({ userInfo: res.data.user });
+      })
+      .catch(err => console.log(err))
+    }
     document.addEventListener('mousedown', this.handleClickOutside);
     // this.setState({ windowWidth: window.innerWidth}, this.newsLength())
     // window.addEventListener('resize', () => {
@@ -56,19 +66,36 @@ class App extends Component {
     }
   }
 
-  registerUserFun = (user) => {
-    // registerUser(user)
-    // .then(res => console.log(res))
-    // .catch(err => console.log(err))
+  setUserInfo = (userInfo) => {
+    this.setState({userInfo});
+    this.setState({ loggedin: true });
+    localStorage.setItem('loggedin', true);
   }
 
   handleLogin = (e) => {
     e.preventDefault();
-    this.setState({ loggedin: true });
+    const userInfo = {
+      email: this.state.email,
+      password: this.state.password
+    }
+    signInUser(userInfo)
+    .then(res => {
+      this.setState({ 
+        loggedin: true,
+        authToggle: false,
+        userInfo: res.data
+       });
+      localStorage.setItem('loggedin', true);
+      this.props.history.push('/account');
+    })
+    .catch(err => console.log(err) )
   }
 
   handleSignout = () => {
     this.setState({ loggedin: false });
+    this.setState({ userInfo: '' });
+    localStorage.removeItem('loggedin');
+    this.props.history.push('/');
   }
 
   checkAuth = (Component, props) => {
@@ -104,9 +131,10 @@ class App extends Component {
       signin: this.handleLogin,
       signout: this.handleSignout,
       toggleAuthModal: this.toggleAuthModal,
-      registerUserFun: this.registerUserFun
+      registerUserFun: this.registerUserFun,
+      setUserInfo: this.setUserInfo,
+      userInfo: this.state.userInfo
     }
-    // <Route exact path="/account" render={ () => this.checkAuth(Account, allProps) } />
     return (
       <div className="Site">
         <div className="Site-content">
@@ -129,7 +157,7 @@ class App extends Component {
           </div>
           <Switch>
             <Route exact path="/" component={Main} /> 
-            <Route exact path="/account" component={Account} />
+            <Route exact path="/account" render={ () => this.checkAuth(Account, allProps) } />
             <Route exact path="/espn" component={ESPN} />
             <Route exact path="/bleacher-report" component={BR} />
             <Route exact path="/fox-sports" component={FOX} />
