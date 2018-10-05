@@ -7,18 +7,28 @@ const expressValidator = require('express-validator');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+var flash = require('connect-flash');
+const promisify = require('es6-promisify');
+
 const path = require('path');
 const routes = require('./routes/index');
 require('dotenv').config();
 require('./handlers/passport');
 const app = express();
 
+// middleware
+
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+}
+
+app.use(cookieParser());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(expressValidator());
-
-app.use(cookieParser());
 
 app.use(session({
     secret: process.env.SECRET,
@@ -31,24 +41,20 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-}
+app.use(flash());
+
 
 mongoose.connect(process.env.DATABASE, {useNewUrlParser: true})
 .then(() => console.log('Mongo connection successful'))
 .catch(err => console.log(`Mongo error ${err}`))
 mongoose.set('useCreateIndex', true)
 
-app.use('/', routes)
+// app.use((req, res, next) => {
+//     req.login = promisify(req.login, req);
+//     next();
+// });
 
-app.use((error, req, res, next) => {
-    console.error(error);
-    res.status(500).json({
-      error
-    })
-});
+app.use('/', routes)
 
 const port = process.env.PORT || 5555;
 

@@ -1,12 +1,14 @@
 const passport = require('passport');
-const mongoose = require('mongoose');
-const crypto = require('crypto');
-const User = require('../models/User');
-const promisify = require('es6-promisify');
-const main = require('../handlers/mail');
-const passwordValidator = require('password-validator');
 
-exports.login = passport.authenticate('local', { failureRedirect: '/' }),
-  function(req, res) {
-    res.redirect('/account');
-  };
+// exports.login = passport.authenticate('local', { successMessage: true, failureMessage: true }),
+//   function(req, res) {
+//     console.log(req)
+//     res.status(200).json({ 'it': 'worked' })
+//   }
+
+exports.login = passport.authenticate('local', { 
+  successRedirect: 'http://localhost:3000/account',
+  successFlash: true,
+  failureRedirect: 'http://localhost:3000/signup',
+  failureFlash: true 
+})

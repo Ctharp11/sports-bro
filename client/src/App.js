@@ -106,6 +106,7 @@ class App extends Component {
       toggleAuthModal: this.toggleAuthModal,
       registerUserFun: this.registerUserFun
     }
+    // <Route exact path="/account" render={ () => this.checkAuth(Account, allProps) } />
     return (
       <div className="Site">
         <div className="Site-content">
@@ -128,7 +129,7 @@ class App extends Component {
           </div>
           <Switch>
             <Route exact path="/" component={Main} /> 
-            <Route exact path="/account" render={ () => this.checkAuth(Account, allProps) } />
+            <Route exact path="/account" component={Account} />
             <Route exact path="/espn" component={ESPN} />
             <Route exact path="/bleacher-report" component={BR} />
             <Route exact path="/fox-sports" component={FOX} />

@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
 const passwordValidator = require('password-validator');
 const User = require('../models/User');
-const promisify = require('es6-promisify');
+const promisify = require('es6-promisify')
 
 exports.validateRegister = (req, res, next) => {
-    req.body.name = req.body.user.name
-    req.body.email = req.body.user.email
-    req.body.password = req.body.user.password
+    req.body = {
+        name: req.body.user.name,
+        email: req.body.user.email,
+        password: req.body.user.password
+    }
     req.sanitizeBody('name');
     req.checkBody('name', 'You must supply a name!').notEmpty();
     req.checkBody('email', 'That email is not valid!').isEmail();
@@ -43,25 +45,18 @@ exports.validatePassword = (req, res, next) => {
 
 exports.register = async (req, res, next) => {
     try {
-        console.log('req.body.user', req.body.user)
-        const user = new User({
-            email: req.body.user.email,
-            name: req.body.user.name
-        })
-        await user.save()
-        // const register = promisify(User.register, User);
-        // await register(user, req.body.password);
-        const errors = req.validationErrors()
-        console.log('errors', errors)
-        if('controller',errors) {
-            console.log(errors)
-        }
-
-        console.log('here')
+        const user = new User({email: req.body.email, name: req.body.name});
+        const register = promisify(User.register, User);
+        await register(user, req.body.password);
         next()
     }
     catch(err) {
-        res.status(500).json(err)
+        console.log('error register', err)
+        res.send({'error': err})
         return;
     }
+}
+
+exports.getAccount = (req, res) => {
+    res.status(200).json({ 'success': req.user });
 }

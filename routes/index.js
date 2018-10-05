@@ -13,5 +13,7 @@ router.post('/register',
     userController.register,
     authController.login
 )
+router.route('/account')
+    .get(userController.getAccount)
 
 module.exports = router;
