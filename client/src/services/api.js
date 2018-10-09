@@ -1,6 +1,7 @@
 // import axios from 'axios';
 const NewsAPI = require('newsapi');
-const newsapi = new NewsAPI(process.env.REACT_APP_NEWSAPI_KEY);
+const newsapi = new NewsAPI(process.env.REACT_APP_NEWSAPI_KEY);  
+
 
 
 export const newsApiAll = newsapi.v2.topHeadlines({
