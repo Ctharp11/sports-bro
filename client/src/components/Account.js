@@ -8,16 +8,16 @@ class Account extends Component {
         }
     }
     render(){
-      console.log(this.props.userInfo)
+      // console.log(this.props.userInfo)
       if(!this.props.userInfo) {
         return null 
       }
       return (
         <div className="account"> 
           <div className="container">
-            Welcome {this.props.userInfo.name}!
+            <div className="account-head"> Welcome {this.props.userInfo.name}! </div>
+            <div className="account-text"> Account section coming soon </div>
           </div>
-         
         </div>
       )
     }

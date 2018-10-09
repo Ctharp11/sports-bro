@@ -9,8 +9,9 @@ class NotFound extends Component {
     }
     render() {
         return(
-            <div> 
-                NotFound 
+            <div className="container"> 
+                <div className="notfound"> Sorry, page not found! </div>
+                <div className="notfound-image"><img src="/img/bro-wink.png" alt="page not found" /></div>
             </div>
         )
     }

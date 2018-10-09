@@ -18,5 +18,12 @@ router.route('/account')
 router.route('/user')
     .get(userController.getUser);
 router.post('/login', authController.login);
+router.get('/logout', authController.logout)
+router.post('/account/forgot', authController.forgot);
+router.get('/account/reset/:token', authController.reset);
+router.post('/account/reset/:token', 
+    userController.validatePassword,
+    authController.updatePasswords
+)
 
 module.exports = router;

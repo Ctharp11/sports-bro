@@ -83,7 +83,12 @@
         }
     }
     &-text {
+        display: flex;
+        justify-content: center;;
+    }
+    &-password {
         text-align: center;
+        
         font-size: 1.4rem;
         &:hover {
             cursor: pointer;

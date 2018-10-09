@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch, withRouter, Link } from 'react-router-dom';
-import { getUser, signInUser } from './services/utils';
+import { getUser, signInUser, logout } from './services/utils';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import Account from './components/Account';
@@ -15,6 +15,8 @@ import BIBLE from './components/Bible/Bible';
 import BBC from './components/BBC/BBC';
 import Signup from './components/Signup';
 import NotFound from './components/NotFound';
+import PasswordReset from './components/PasswordReset';
+import EnterNewPassword from './components/EnterNewPassword';
 
 // import { registerUser } from './services/utils';
 
@@ -34,8 +36,9 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const user = localStorage.getItem('loggedin');
     if (localStorage.getItem('loggedin')){
-      getUser()
+      getUser(user)
       .then(res => { 
         this.setState({ loggedin: true });
         this.setState({ userInfo: res.data.user });
@@ -68,8 +71,9 @@ class App extends Component {
 
   setUserInfo = (userInfo) => {
     this.setState({userInfo});
+    console.log('userInfo', userInfo)
     this.setState({ loggedin: true });
-    localStorage.setItem('loggedin', true);
+    localStorage.setItem('loggedin', [true]);
   }
 
   handleLogin = (e) => {
@@ -85,7 +89,7 @@ class App extends Component {
         authToggle: false,
         userInfo: res.data
        });
-      localStorage.setItem('loggedin', true);
+      localStorage.setItem('loggedin', res.data._id);
       this.props.history.push('/account');
     })
     .catch(err => console.log(err) )
@@ -95,6 +99,9 @@ class App extends Component {
     this.setState({ loggedin: false });
     this.setState({ userInfo: '' });
     localStorage.removeItem('loggedin');
+    logout()
+    .then(res => res)
+    .catch(err => err)
     this.props.history.push('/');
   }
 
@@ -167,6 +174,8 @@ class App extends Component {
             <Route exact path="/sports-bible" component={BIBLE} />
             <Route exact path="/bbc-sports" component={BBC} />
             <Route exact path="/signup" render={() => <Signup {...allProps} />} />
+            <Route exact path="/password-reset" render={() => <PasswordReset {...allProps} />} />
+            <Route exact path="/account/reset/:id" component={PasswordReset} />
             <Route component={NotFound} />
 
           </Switch>
@@ -184,7 +193,7 @@ class App extends Component {
                 <input className="modal-input-button" type="submit" />
               </form>
               <div className="modal-signup"><Link to="signup" onClick={this.toggleAuthModal}>No account? Create one here. </Link> </div>
-              <div className="modal-text"> Forgot password </div>
+              <div className="modal-text" > <Link onClick={this.toggleAuthModal} className="modal-password" to="/password-reset"> Forgot password </Link> </div>
             </div> 
           </div>
         }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ArticleContainer from '../Article/ArticleContainer';
 import { newsApiAll } from '../../services/api.js'
 
 class TopNews extends Component{
@@ -23,27 +24,20 @@ class TopNews extends Component{
                 {this.state.posts.length > 0
                     ?
                     <div>
-                        <div className="sub-header"> Today's Top News </div> 
-                        <div className="toppost">
-                        {this.state.posts.map((post,index) => (
-                            <div className="toppost-content" key={index}> 
-                            <div className="toppost-title"> {post.title} </div>
-                            <div className="toppost-flex">
-                                <img className="toppost-img" src={!post.urlToImage ? '/img/no-pic.svg' : post.urlToImage} alt="post" />
-                                <div> 
-                                <div> {post.source.name} </div> <br />
-                                <div> {post.publishedAt.match(/[^T]*/i)[0]} </div>
-                                </div>
-                            </div>
-                            <div className="toppost-description"> {post.description && <span>{post.description.split(' ').slice(0, 17).join(' ')}...</span>} </div>
-                            </div>
+                     <div className="container"> 
+                     <div className="art-con-thumb-flex">
+                     <div className="art-con-thumb-title"> Today's Top News </div>
+                    </div>
+                    <div className="art-con">
+                      {this.state.posts.map((post,index) => (
+                        <div key={index}><a href={post.url} target="_blank"> <ArticleContainer {...post}/></a> </div>
                         ))
-                        }
-                        </div>
-                        <div className="toppost-scroll"> Scroll to see more --> </div>
+                      }
+                     </div>
+                    </div>    
                     </div>
                  : 
-                 <div> Loading... </div>
+                 <div className="loading"> Loading... </div>
                 }
             </div>
         )
