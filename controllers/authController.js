@@ -5,9 +5,9 @@ const crypto = require('crypto');
 const promisify = require('es6-promisify');
 
 exports.login = passport.authenticate('local', { 
-  successRedirect: 'http://localhost:3000/account',
+  successRedirect: 'https://sports-bro.herokuapp.com/account',
   successFlash: true,
-  failureRedirect: 'http://localhost:3000/signup',
+  failureRedirect: 'https://sports-bro.herokuapp.com/signup',
   failureFlash: true 
 })
 exports.logout = (req, res) => {
@@ -44,8 +44,6 @@ exports.reset = async (req, res) => {
 }
 exports.updatePasswords = async (req, res) => {
   try {
-    // console.log(req.params.token)
-    // console.log(req.body.password)
     const user = await User.findOne({ 
       resetPasswordToken: req.params.token,
       resetPasswordExpires: { $gt: Date.now() }
@@ -53,15 +51,11 @@ exports.updatePasswords = async (req, res) => {
     if(!user) {
       res.status(200).json({'errors': 'Password reset token invalid or expired' });
     }
-    // console.log('user', user)
     const setPassword = promisify(user.setPassword, user);
     await setPassword(req.body.password)
-    // console.log(setPassword)
     user.resetPasswordToken = undefined;
     user.resetPasswordExpires = undefined;
     const updatedUser = await user.save();
-    // await req.login(updatedUser);
-    console.log(req.login)
     res.json({ 'successLogin': updatedUser })
   } 
   catch(err) {

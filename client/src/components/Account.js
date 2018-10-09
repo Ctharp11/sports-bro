@@ -8,7 +8,6 @@ class Account extends Component {
         }
     }
     render(){
-      // console.log(this.props.userInfo)
       if(!this.props.userInfo) {
         return null 
       }

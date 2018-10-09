@@ -24,7 +24,6 @@ class PasswordReset extends Component {
         e.preventDefault();
         forgot(this.state.email)
         .then(res => {
-            console.log(res)
             if (res.data.success) {
                 this.setState({success: res.data.success})
             }
@@ -47,9 +46,7 @@ class PasswordReset extends Component {
         } 
         confirmedPasswords(this.state.key, this.state.password)
         .then(res => {
-            console.log(res)
             if (res.data.errors) {
-                console.log('res.data.errors', res.data.errors)
                 this.setState({ error: res.data.errors})
             }
             if(res.data.successLogin) {

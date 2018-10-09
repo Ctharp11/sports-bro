@@ -62,8 +62,6 @@ exports.getAccount = (req, res) => {
 
 exports.getUser = async (req, res) => {
     try {
-        console.log('req.body', req.body)
-        console.log('req.user', req.user)
         const user = await User.findById(req.user._id);
         res.json({'user': user})
     }

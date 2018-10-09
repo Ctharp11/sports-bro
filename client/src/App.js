@@ -16,11 +16,6 @@ import BBC from './components/BBC/BBC';
 import Signup from './components/Signup';
 import NotFound from './components/NotFound';
 import PasswordReset from './components/PasswordReset';
-import EnterNewPassword from './components/EnterNewPassword';
-
-// import { registerUser } from './services/utils';
-
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   constructor () {
@@ -46,17 +41,10 @@ class App extends Component {
       .catch(err => console.log(err))
     }
     document.addEventListener('mousedown', this.handleClickOutside);
-    // this.setState({ windowWidth: window.innerWidth}, this.newsLength())
-    // window.addEventListener('resize', () => {
-    //   this.setState({ windowWidth: window.innerWidth}, this.newsLength)
-    // })
   }
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutside);
-    // window.removeEventListener('resize', () => {
-    //   this.setState({ windowWidth: window.innerWidth})
-    // })
   }
 
   setWrapperRef = (node) => {
@@ -71,7 +59,6 @@ class App extends Component {
 
   setUserInfo = (userInfo) => {
     this.setState({userInfo});
-    console.log('userInfo', userInfo)
     this.setState({ loggedin: true });
     localStorage.setItem('loggedin', [true]);
   }
